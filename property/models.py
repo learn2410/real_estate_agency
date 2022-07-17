@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 
@@ -46,10 +47,19 @@ class Flat(models.Model):
         null=True,
         blank=True,
         db_index=True)
-    new_building=models.BooleanField(
+    new_building = models.BooleanField(
         'Новостройка',
         null=True,
         blank=True)
 
     def __str__(self):
         return f'{self.town}, {self.address} ({self.price}р.)'
+
+
+class Conplaint(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Кто жаловался')
+    problem_flat = models.ForeignKey(Flat, on_delete=models.CASCADE, verbose_name='Квартира, на которую жаловались')
+    description = models.TextField('Текст жалобы')
+
+    def __str__(self):
+        return f'{self.user} - {self.problem_flat}: {str(self.description)[:40]}  '
