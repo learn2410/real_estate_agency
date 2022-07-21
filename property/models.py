@@ -85,6 +85,7 @@ class Owner(models.Model):
         blank=True)
     flats = models.ManyToManyField(
         Flat,
+        blank=True,
         related_name='owners',
         verbose_name='Квартиры в собственности')
 
