@@ -10,6 +10,7 @@ class OwnerInline(admin.TabularInline):
     verbose_name = "Собственник"
     verbose_name_plural = "Собственники"
 
+@admin.register(Flat)
 class FlatAdmin(admin.ModelAdmin):
     search_fields = ('town', 'address')
     readonly_fields = ('created_at',)
@@ -19,15 +20,11 @@ class FlatAdmin(admin.ModelAdmin):
     raw_id_fields = ('liked_by',)
     inlines = [OwnerInline]
 
-
+@admin.register(Conplaint)
 class ConplaintAdmin(admin.ModelAdmin):
     raw_id_fields = ('problem_flat',)
 
-
+@admin.register(Owner)
 class OwnerAdmin(admin.ModelAdmin):
     raw_id_fields = ('flats',)
 
-
-admin.site.register(Flat, FlatAdmin)
-admin.site.register(Conplaint, ConplaintAdmin)
-admin.site.register(Owner, OwnerAdmin)
