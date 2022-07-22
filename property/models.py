@@ -60,7 +60,7 @@ class Flat(models.Model):
         return f'{self.town}, {self.address} ({self.price}р.)'
 
 
-class Conplaint(models.Model):
+class Complaint(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
