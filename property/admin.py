@@ -10,6 +10,14 @@ class OwnerInline(admin.TabularInline):
     verbose_name = "Собственник"
     verbose_name_plural = "Собственники"
 
+
+class ComplaintInline(admin.TabularInline):
+    model = Complaint
+    extra = 0
+    verbose_name = "Жалоба"
+    verbose_name_plural = "Жалобы"
+
+
 @admin.register(Flat)
 class FlatAdmin(admin.ModelAdmin):
     search_fields = ('town', 'address')
@@ -18,13 +26,14 @@ class FlatAdmin(admin.ModelAdmin):
     list_editable = ['new_building']
     list_filter = ('new_building', 'rooms_number', 'has_balcony')
     raw_id_fields = ('liked_by',)
-    inlines = [OwnerInline]
+    inlines = [OwnerInline, ComplaintInline]
+
 
 @admin.register(Complaint)
 class ComplaintAdmin(admin.ModelAdmin):
     raw_id_fields = ('problem_flat',)
 
+
 @admin.register(Owner)
 class OwnerAdmin(admin.ModelAdmin):
     raw_id_fields = ('flats',)
-
